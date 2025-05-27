@@ -74,9 +74,10 @@ io.sockets.on('connection', (socket) =>{
         socket.in(room).emit('send_message', data)
     })
 })
-server.listen(4040, ()=>{
-    console.log('listening on port 4040')
-})
+if (require.main === module) {
+    server.listen(4040, () => {
+      console.log('listening on port 4040')
+    });
+  }
 
-
-module.exports = app
+module.exports = { app, server };
