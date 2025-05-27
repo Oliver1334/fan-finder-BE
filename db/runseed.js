@@ -1,8 +1,13 @@
-const {seed} = require("./seed");
+const { seed } = require("./seed");
 const mongoose = require("mongoose");
 
-exports.runSeed = () => {
-  return seed().then(() => {
-    // mongoose.connection.close();
-  });
+exports.runSeed = async () => {
+  try {
+    await seed();
+    console.log("🌱 Seed complete");
+  } catch (err) {
+    console.error("❌ Seed error:", err);
+  } finally {
+    mongoose.connection.close(); // ✅ THIS IS IMPORTANT
+  }
 };

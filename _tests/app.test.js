@@ -1,5 +1,5 @@
 require("dotenv").config();
-const app = require("../app");
+const { app, server } = require("../app");
 const request = require("supertest");
 
 const mongoose = require("mongoose");
@@ -7,14 +7,27 @@ const { seed } = require("../db/seed");
 
 // beforeEach?
 //  -> reseed database with supertest
-beforeEach(async () => {
-  await seed();
-});
+beforeAll(async () => {
+    // Connect to the test DB (use your test URI)
+    await mongoose.connect(process.env.DEVELOPMENT_DB || "mongodb://localhost:27017/testdb", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  });
+  
+  beforeEach(async () => {
+    // Seed before each test
+    await seed();
+  });
+  
+  afterAll(async () => {
+    await mongoose.connection.close();
 
-afterAll(() => {
-  mongoose.connection.close();
-});
+     // Close server, wait for it to finish
+  await new Promise((resolve) => server.close(resolve))
 
+  });
+  
 describe("appTests", () => {
   describe("app", () => {
     test("GET: 404 /api/non-existant-route", () => {
