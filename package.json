@@ -12,15 +12,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/JJJUhlar/fanfinder_backend.git"
+        "url": "git+https://github.com/Oliver1334/fan-finder-BE.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/JJJUhlar/fanfinder_backend/issues"
+        "url": "https://github.com/Oliver1334/fan-finder-BE/issues"
     },
-    "homepage": "https://github.com/JJJUhlar/fanfinder_backend#readme",
+    "homepage": "https://github.com/Oliver1334/fan-finder-BE#readme",
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
