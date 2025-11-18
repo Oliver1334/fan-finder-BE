@@ -14,10 +14,8 @@ const {
   } = require("../models/models");
   
   exports.getUsers = (req, res, next) => {
-    console.log("getting users...")
     return selectAllUsers()
       .then((data) => {
-        console.log("sending users...")
         res.status(200).send({ users: data });
       })
       .catch((err) => {
@@ -49,10 +47,8 @@ const {
   };
   
   exports.getComments = (req, res, next) => {
-    console.log("getting comments...")
     return selectComments()
       .then((comments) => {
-        console.log("sending commments...")
         res.status(200).send({ comments: comments });
       })
       .catch((err) => {
@@ -62,10 +58,8 @@ const {
   
   exports.getCommentsByGigId = (req, res, next) => {
     const { gig_id } = req.params;
-    // console.log(gig_id, "gig id")
     return selectCommentsByGigId(gig_id)
       .then((comments) => {
-        // console.log(comments);
         res.status(200).send({ comments: comments });
       })
       .catch((err) => {
@@ -76,11 +70,9 @@ const {
   exports.patchUserGigs = (req, res, next) => {
     const {user_id} = req.params;
     const {gig_id} = req.body;
-    console.log(user_id)
-  
+
     return pushGigToUser(user_id, gig_id)
       .then((result)=>{
-        console.log(result, "updated gigs")
         res.status(201).send({"gigs": result.gigs})
       })
       .catch((err)=>{
@@ -90,10 +82,9 @@ const {
   
   exports.getUserGigs = (req, res, next) => {
     const {user_id} = req.params
-  
+
     return selectUserGigs(user_id)
       .then((result)=>{
-        console.log(result, "user gigs")
         res.status(200).send({"gigs": result})
       })
       .catch((err)=>{
@@ -103,11 +94,9 @@ const {
   
   exports.getFansByGig = (req, res, next) => {
     const {gig_id} = req.params;
-    console.log(gig_id)
-  
+
     return selectFansByGig(gig_id)
       .then((data)=>{
-        console.log(data)
         res.status(200).send({"fans": data})
       })
       .catch((err)=>{
@@ -117,11 +106,9 @@ const {
   
   exports.postCommentByGig = (req, res, next) => {
     const comment = req.body
-    console.log(comment)
-  
+
     return insertComment(comment)
       .then((data)=>{
-        console.log(data)
         res.status(201).send({"comment": data})
       })
       .catch((err)=>{

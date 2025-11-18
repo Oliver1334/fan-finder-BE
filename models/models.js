@@ -5,7 +5,6 @@ const connection = require("../db/connection");
 
 exports.selectAllUsers = () => {
   return User.find().then((users) => {
-    console.log("got users from mongo")
     return users;
   });
 };
@@ -21,16 +20,13 @@ exports.createUser = (displayName, avatarURL) => {
 };
 
 exports.selectComments = () => {
-  console.log("selecting comments!");
   return Comments.find().then((comments) => {
-    console.log("got comments from mongo")
     return comments;
   });
 };
 
 exports.selectCommentsByGigId = (gig_id) => {
   return Comments.find({ gig_id: gig_id }).then((comments) => {
-    // console.log(comments, "selected comments");
     return comments;
   });
 };
@@ -57,7 +53,6 @@ exports.selectUserGigs = (user_id) => {
 exports.selectFansByGig = (gig_id) => {
   return User.find({"gigs": gig_id})
     .then((data)=>{
-      console.log(data)
       return data
     })
 }
@@ -65,7 +60,6 @@ exports.selectFansByGig = (gig_id) => {
 exports.insertComment = (comment) => {
   return Comments.create(comment)
     .then((data)=>{
-      console.log(data)
       return data
     })
 }
@@ -95,7 +89,6 @@ exports.insertMessageToChat = (chat_id, user_id, message, created_at) => {
 
   return Chats.create(new_message)
     .then((data)=>{
-      console.log(data, "inserted chat message")
       return data
     })
 }
