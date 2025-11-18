@@ -1,6 +1,5 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const PASS = process.env.PASS;
 const User = require("../schemas/user-schema");
 const userData = require("./data/user-dev-data");
 

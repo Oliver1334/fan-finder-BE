@@ -133,7 +133,6 @@ describe("appTests", () => {
         .expect(201)
         .then(({body}) => {
           const comment = body.comment;
-          console.log(comment)
           expect(comment).toHaveProperty('user', expect.any(String))
           expect(comment).toHaveProperty('text', expect.any(String))
           expect(comment).toHaveProperty('gig_id', expect.any(String))
@@ -168,7 +167,6 @@ describe("appTests", () => {
         .expect(201)
         .then(({body}) => {
           const gigs = body.gigs;
-          console.log(gigs);
           expect(Array.isArray(gigs)).toBe(true);
           expect(gigs.includes("Z4qgVMyxjZtnPgJSycnMZda")).toBe(true);
         });
@@ -179,10 +177,7 @@ describe("appTests", () => {
         .get("/api/users/BlueShoes/gigs")
         .expect(200)
         .then(({ body }) => {
-          console.log(body);
           const gigs = body.gigs;
-          console.log(Object.prototype.toString.call(gigs), "!!!!!!!!!!!!!");
-          console.log(gigs);
           expect(Array.isArray(gigs)).toBe(true);
           if (gigs.length > 0) {
             gigs.forEach((gig) => {
@@ -199,10 +194,7 @@ describe("appTests", () => {
         .get('/api/users/Kate/chats')
         .expect(200)
         .then(({body})=>{
-
             const chats = body.chats
-            console.log(body)
-           
         })
     })
 

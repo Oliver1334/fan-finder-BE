@@ -3,10 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-const PASS = process.env.PASS
 const {
     getUsers,
-    getUserbyName, 
+    getUserbyName,
     postUser,
     getComments,
     getCommentsByGigId,
@@ -54,22 +53,20 @@ app.patch('/api/users/:user_id/gigs', patchUserGigs)
 
 app.get('/api/users/:user_id/chats', getChatsByUserId)
 app.get('/api/users/:user_id/:chat_id', getChatByChatId)
-// Create new chat
 
 app.use(handle404s);
 app.use(handle500s)
-// socket io 
+
 io.sockets.on('connection', (socket) =>{
     console.log(`User connected: ${socket.id}`)
 
     socket.on('join_room', (data)=>{
         const {user, room} = data;
         socket.join(room);
-        console.log(`${user} joined ${room}`)    
+        console.log(`${user} joined ${room}`)
     })
 
     socket.on('send_message', (data)=>{
-        console.log(data, `got message`)
         const {room, msg} = data;
         socket.in(room).emit('send_message', data)
     })
